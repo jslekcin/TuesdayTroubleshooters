@@ -1,2 +1,3 @@
+from math import factorial
 for i in range(10**10): 
-    print(str(i)+". hi") 
+    print(str(factorial(i))+". hi") 
