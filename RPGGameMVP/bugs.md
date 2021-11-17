@@ -1,0 +1,1 @@
+- Subchunks can be exited from sides when entering from shop *removed shop entrance, chunk still exists*
