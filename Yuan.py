@@ -1,2 +1,2 @@
-for i in range(7): 
-    print("hi")
+for i in range(10**10): 
+    print(str(i)+". hi") 
