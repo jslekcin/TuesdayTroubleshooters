@@ -226,6 +226,8 @@ def GameplayRender():
     
     # UI Rendering
     objects.screen.blit(objects.myFont.render("Coins: "+ str(objects.resourceAmounts["coins"]), True, (0,0,0)), (0,0))
+    
+
     # Draw healthbar
     pygame.draw.rect(objects.screen, (15,15,15), pygame.Rect(300,0,200,20))
     pygame.draw.rect(objects.screen, (0,255,0), pygame.Rect(300,0,objects.player.currentHealth/objects.player.maxHealth*200,20))
