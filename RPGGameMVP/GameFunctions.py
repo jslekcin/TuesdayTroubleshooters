@@ -10,12 +10,12 @@ pygame.init()
 
 buttons = {
     "game": [], 
-    "menu": [Classes.Button(pygame.transform.scale(pygame.image.load("Pixel Images/StartButton.png"), (500,100)),(250,450), ['objects.gamestate = 1','objects.Reset()']), Classes.Button(pygame.image.load("Pixel Images/AboutUsButton.png"),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+    "menu": [Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\StartButton.png"), (500,100)),(250,450), ['objects.gamestate = 1','objects.Reset()']), Classes.Button(pygame.image.load("RPGGameMVP\Pixel Images\AboutUsButton.png"),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
-    Classes.Button(pygame.transform.scale(pygame.image.load("Pixel Images/Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("Pixel Images/Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("Pixel Images/Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("Pixel Images/Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
+    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
+    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
+    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
+    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
     Classes.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Classes.Player()
@@ -176,7 +176,7 @@ def ShopUpdate():
     for button in buttons["shop"]: 
         button.update()
 
-shopImage = pygame.image.load("Pixel Images/ShopInv.png")
+shopImage = pygame.image.load("RPGGameMVP\Pixel Images\ShopInv.png")
 def ShopRender():
     objects.screen.blit(shopImage, (150, 150))
     #for button in buttons["shop"]: 
@@ -186,16 +186,16 @@ def ShopRender():
 shopImage = pygame.Surface((200,200))
 def generateShop(): # P.S. I know this is not efficient
     shopImage.fill((200,200,200))
-    #Potion = pygame.image.load("Pixel Images/Purple Potion.png")
+    #Potion = pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png")
     #PotionRect = Potion.get_rect()
     #PotionRect.center = (50,50)
-    RedPotion = pygame.image.load("Pixel Images/Red Potion.png")
+    RedPotion = pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png")
     RedPotionRect = RedPotion.get_rect()
     RedPotionRect.center = (150,50)
-    BluePotion = pygame.image.load("Pixel Images/Blue Potion.png")
+    BluePotion = pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png")
     BluePotionRect = BluePotion.get_rect()
     BluePotionRect.center = (50,150)
-    GoldPotion = pygame.image.load("Pixel Images/Gold Potion.png")
+    GoldPotion = pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png")
     GoldPotionRect = GoldPotion.get_rect()
     GoldPotionRect.center = (150,150)
     #shopImage.blit(Potion, PotionRect)
@@ -205,16 +205,16 @@ def generateShop(): # P.S. I know this is not efficient
 generateShop()
 '''
 
-objects.abilityPanel = [pygame.image.load("Pixel Images/Arrow Icon.png"),
-                pygame.image.load("Pixel Images/Fireball Icon.png"),
-                pygame.image.load("Pixel Images/Freeze Icon.png"),
-                pygame.image.load("Pixel Images/Speed Icon.png"),
-                pygame.image.load("Pixel Images/Poison Icon.png"),
-                pygame.image.load("Pixel Images/Summoning Icon.png"),
-                pygame.image.load("Pixel Images/Shield Icon.png"),
-                pygame.image.load("Pixel Images/Laser Icon.png"),
-                pygame.image.load("Pixel Images/Wave Icon.png"),
-                pygame.image.load("Pixel Images/Potion Icon.png")]
+objects.abilityPanel = [pygame.image.load("RPGGameMVP\Pixel Images\Arrow Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Fireball Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Freeze Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Speed Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Poison Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Summoning Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Shield Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Laser Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Wave Icon.png"),
+                pygame.image.load("RPGGameMVP\Pixel Images\Potion Icon.png")]
 
 def GameplayRender(): 
     # RENDER (Putting stuff on the screen)
@@ -246,7 +246,7 @@ def GameplayRender():
 
 def MenuRender(): 
     objects.screen.fill((255,255,255))
-    titleScreen = pygame.image.load("Pixel Images/StartScreen.png")
+    titleScreen = pygame.image.load("RPGGameMVP\Pixel Images\StartScreen.png")
     
     objects.screen.blit(titleScreen, (0, 0))
     for button in buttons["menu"]: 
@@ -330,7 +330,7 @@ def MathUpdate():
             #    else: 
             #        gamestate = 4
 
-panelImage = pygame.image.load("Pixel Images/MathPanel.png")
+panelImage = pygame.image.load("RPGGameMVP\Pixel Images\MathPanel.png")
 panelRect = panelImage.get_rect()
 def MathRender():
     # Display our background
