@@ -5,6 +5,9 @@ import objects
 # 1) Append the quests
 # 2) Add the active code to update data to the quest item
 
+# Need to display our quests
+# Create all of our quests
+
 objects.quests.append(
     Classes.Quest("Defeat the Fire Boss!","self.data == True","The Fire Boss")
 )
