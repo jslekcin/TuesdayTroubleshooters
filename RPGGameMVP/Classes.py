@@ -1257,7 +1257,7 @@ class WaterGhostBoss:
 
 class FinalBossGhost(Enemy):
     def __init__(self): 
-        self.neutralImage = pygame.image.load("RPGGameMVP\Pixel Images\NeutralFB.png")
+        self.neutralImage = pygame.image.load("RPGGameMVP\Pixel Images/NeutralFB.png")
         self.fireImage = pygame.image.load("RPGGameMVP\Pixel Images\FireFB.png")
         self.iceImage = pygame.image.load("RPGGameMVP\Pixel Images\IceFB.png")
         self.lightningImage = pygame.image.load("RPGGameMVP\Pixel Images\LightningFB.png")
