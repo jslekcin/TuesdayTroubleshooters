@@ -22,7 +22,7 @@ import webbrowser
 class Player:
     # Player Setup
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Player.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Player.png")
         self.rect = self.image.get_rect()
         self.chunk = (0,0)
         self.currentHealth = 100
@@ -96,7 +96,7 @@ class FireArrow(): # Ability 1: Fires an arrow projectile
 
 class Arrow:
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("Pixel Images/Arrow.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Arrow.png")
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         self.rect = self.image.get_rect()
         self.rect.center = objects.player.rect.center
@@ -158,7 +158,7 @@ class LaunchFireball:
 
 class Fireball:
     def __init__(self,size,direction,rotationAngle, position):
-        self.image = pygame.image.load("Pixel Images/Fireball.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png")
         self.size = size
         self.attackDamage = 20
         if self.size == "small": 
@@ -274,7 +274,7 @@ class ElectroDash:
 
 class PoisonField: 
     def __init__(self): 
-        self.image = pygame.image.load("Pixel Images/Poison Effect.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Effect.png")
         self.image.set_alpha(150)
         self.cooldown = 0
         self.duration = 5 * objects.framerate
@@ -300,7 +300,7 @@ class PoisonField:
 
 class SummonAbility:
     def __init__(self): 
-        self.image = pygame.image.load("Pixel Images/Ghost Enemy.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Ghost Enemy.png")
         self.speed = 10
         self.attackDamage = 20
         self.rect = self.image.get_rect()
@@ -343,7 +343,7 @@ class SummonAbility:
 
 class MagicalShield: 
     def __init__(self): 
-        self.image = pygame.image.load("Pixel Images/Magical Shield.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Magical Shield.png")
         self.rect = self.image.get_rect() 
         self.cooldown = 0
         self.duration = 5 * objects.framerate
@@ -401,7 +401,7 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
 
 class LaserArrow:
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("Pixel Images/Laser Arrow.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Laser Arrow.png")
         self.image = pygame.transform.scale(self.image, (40,10))
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         
@@ -461,7 +461,7 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
 
 class Wave:
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("Pixel Images/Wave.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Wave.png")
         if rotationAngle > 360: 
             rotationAngle -= 360
         self.image = pygame.transform.scale(self.image, (100,200))
@@ -491,7 +491,7 @@ class PotionAbility:
     images = [pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png"),(50,50))]
     number = 0
     def __init__(self): 
-        self.image = pygame.image.load("Pixel Images/Poison Effect.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Effect.png")
         self.mousePressed = False
         self.cooldown = 0
         self.duration = objects.framerate
@@ -527,7 +527,7 @@ class Chunk:
         self.image = pygame.transform.scale(self.image, size)
         if self.location[0] != 7: 
             for i in range(10): 
-                self.image.blit(pygame.image.load("Pixel Images/TallGrass.png"), (random.randint(0,500),random.randint(0,500)))
+                self.image.blit(pygame.image.load("RPGGameMVP\Pixel Images\TallGrass.png"), (random.randint(0,500),random.randint(0,500)))
                 
         self.rect = self.image.get_rect()
         self.nightOverlay = pygame.Surface(objects.size)
@@ -566,7 +566,7 @@ class Resource:
     def __init__(self, item, quantity, image, location):
         self.item = item
         self.quantity = quantity
-        self.image = pygame.image.load("Pixel Images/Gold Coin.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Gold Coin.png")
         #self.image = pygame.transform.scale(self.image, (10,10))
         self.rect = self.image.get_rect()
         self.rect.center = location
@@ -596,7 +596,7 @@ class Ghost(Enemy):
     def __init__(self, location): 
         self.maxHealth = 20
         self.health = self.maxHealth
-        self.image = pygame.image.load("Pixel Images/Ghost Enemy.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Ghost Enemy.png")
         self.speed = 2
         self.attackDamage = 10
         self.rect = self.image.get_rect()
@@ -653,7 +653,7 @@ class LargeGhost(Ghost):
     def __init__(self, location): 
         self.maxHealth = 50
         self.health = self.maxHealth
-        self.image = pygame.image.load("Pixel Images/Large Ghost.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Large Ghost.png")
         self.speed = 5
         self.attackDamage = 20
         self.rect = self.image.get_rect()
@@ -664,7 +664,7 @@ class LargeGhost(Ghost):
 
 class FireGhostBoss(Enemy):
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Fire Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fire Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (250,250)
         self.attackDamage = 25
@@ -743,7 +743,7 @@ class FireGhostBoss(Enemy):
 
 class IceGhostBoss(Ghost): 
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Ice Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Ice Boss.png")
         self.rect = self.image.get_rect()
         self.rect.center = (250,250)
         self.type = "enemy"
@@ -820,8 +820,8 @@ class IceGhostBoss(Ghost):
 
 class LightningGhostBoss(Enemy):
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Lightning Boss.png")
-        self.shadowImage = pygame.image.load("Pixel Images/Lightning Boss Shadow.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Lightning Boss.png")
+        self.shadowImage = pygame.image.load("RPGGameMVP\Pixel Images\Lightning Boss Shadow.png")
         self.shadowRect = self.shadowImage.get_rect()
         self.rect =  self.image.get_rect()
         self.rect.center = (250,250)
@@ -895,7 +895,7 @@ class LightningGhostBoss(Enemy):
 
 class PoisonGhostBoss(Enemy):
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Poison Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (50,50)
         self.type = "enemy"
@@ -957,7 +957,7 @@ class PoisonGhostBoss(Enemy):
 
 class SummoningGhostBoss(Enemy):
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Summoning Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Summoning Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (250,250)
         self.type = "enemy"
@@ -1017,7 +1017,7 @@ class SummoningGhostBoss(Enemy):
 
 class ShieldGhostBoss(Enemy):
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Summoning Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Summoning Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (250,50)
         self.type = "enemy"
@@ -1068,7 +1068,7 @@ class ShieldGhostBoss(Enemy):
 
 class LaserGhostBoss(Enemy): 
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Laser Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Laser Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (50,50)
         self.type = "enemy"
@@ -1186,7 +1186,7 @@ class LaserGhostBoss(Enemy):
 
 class WaterGhostBoss: 
     def __init__(self):
-        self.image = pygame.image.load("Pixel Images/Ice Boss.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Ice Boss.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (250,250)
         self.type = "enemy"
@@ -1257,15 +1257,15 @@ class WaterGhostBoss:
 
 class FinalBossGhost(Enemy):
     def __init__(self): 
-        self.neutralImage = pygame.image.load("Pixel Images/NeutralFB.png")
-        self.fireImage = pygame.image.load("Pixel Images/FireFB.png")
-        self.iceImage = pygame.image.load("Pixel Images/IceFB.png")
-        self.lightningImage = pygame.image.load("Pixel Images/LightningFB.png")
-        self.poisonImage = pygame.image.load("Pixel Images/PoisonFB.png")
-        self.summoningImage = pygame.image.load("Pixel Images/SummoningFB.png")
-        self.shieldImage = pygame.image.load("Pixel Images/ShieldFB.png")
-        self.laserImage = pygame.image.load("Pixel Images/LaserFB.png")
-        self.waterImage = pygame.image.load("Pixel Images/WaterFB.png")
+        self.neutralImage = pygame.image.load("RPGGameMVP\Pixel Images\NeutralFB.png")
+        self.fireImage = pygame.image.load("RPGGameMVP\Pixel Images\FireFB.png")
+        self.iceImage = pygame.image.load("RPGGameMVP\Pixel Images\IceFB.png")
+        self.lightningImage = pygame.image.load("RPGGameMVP\Pixel Images\LightningFB.png")
+        self.poisonImage = pygame.image.load("RPGGameMVP\Pixel Images\PoisonFB.png")
+        self.summoningImage = pygame.image.load("RPGGameMVP\Pixel Images\SummoningFB.png")
+        self.shieldImage = pygame.image.load("RPGGameMVP\Pixel Images\ShieldFB.png")
+        self.laserImage = pygame.image.load("RPGGameMVP\Pixel Images\LaserFB.png")
+        self.waterImage = pygame.image.load("RPGGameMVP\Pixel Images\WaterFB.png")
         self.images = [self.neutralImage, self.fireImage, self.iceImage, self.lightningImage, self.poisonImage,self.summoningImage,self.shieldImage, self.laserImage, self.waterImage]
         self.currentState = 0
         self.rect = pygame.Rect(0,0,100,100)
@@ -1281,7 +1281,7 @@ class FinalBossGhost(Enemy):
         self.attackDamage = 1
         self.angle = 0
         self.iceDir = 0
-        self.shadowImage = pygame.image.load("Pixel Images/Lightning Boss Shadow.png")
+        self.shadowImage = pygame.image.load("RPGGameMVP\Pixel Images\Lightning Boss Shadow.png")
         self.shadowRect = pygame.Rect(0,0,100,100)
         self.nextLocation = (250,150)
         self.lightningCounter = 0
@@ -1507,7 +1507,7 @@ class FinalBossGhost(Enemy):
 
 class EnemyWave:
     def __init__(self,direction,rotationAngle,location):
-        self.image = pygame.image.load("Pixel Images/Wave.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Wave.png")
         if rotationAngle > 360: 
             rotationAngle -= 360
         self.image = pygame.transform.scale(self.image, (100,200))
@@ -1532,7 +1532,7 @@ class EnemyWave:
 
 class EnemyLaser: 
     def __init__(self,direction,rotationAngle,spawnPos):
-        self.image = pygame.image.load("Pixel Images/Fireball.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png")
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         # self.image = pygame.transform.scale(self.image, (20,10))
         self.rect = self.image.get_rect()
@@ -1555,7 +1555,7 @@ class EnemyLaser:
 
 class Shield: 
     def __init__(self,xPos): 
-        self.image = pygame.image.load("Pixel Images/Silver Coin.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Silver Coin.png")
         self.image = pygame.transform.scale(self.image, (100,25))
         self.rect = self.image.get_rect() 
         self.rect.top = 100
@@ -1588,7 +1588,7 @@ class PoisonDrop:
     def __init__(self, start, target): 
         self.start = start
         self.target = target
-        self.image = pygame.image.load("Pixel Images/Poison Drop.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Drop.png")
         self.rect = self.image.get_rect()
         self.rect.center = self.start
         self.speed = 15
@@ -1612,7 +1612,7 @@ class PoisonDrop:
 
 class PoisonPool:
     def __init__(self,pos):
-        self.image = pygame.image.load("Pixel Images/Poison Puddle.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Puddle.png")
         self.rect = self.image.get_rect()
         self.rect.center = pos
         self.timer = 0
@@ -1633,7 +1633,7 @@ class PoisonPool:
 
 class EnemyIcicle:
     def __init__(self,direction,rotationAngle,spawnPos):
-        self.image = pygame.image.load("Pixel Images/Icicle.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Icicle.png")
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         self.rect = self.image.get_rect()
         self.rect.center = spawnPos
@@ -1657,7 +1657,7 @@ class EnemyIcicle:
 
 class EnemyFireball:
     def __init__(self,direction,rotationAngle,spawnPos):
-        self.image = pygame.image.load("Pixel Images/Fireball.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png")
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         self.rect = self.image.get_rect()
         self.rect.center = spawnPos
@@ -1781,7 +1781,7 @@ class QuestionCube:
     boosts = [["objects.player.currentHealth += 25", 25], ["objects.resourceAmounts['ghostEnergy'] += 25", 50], ["objects.moveSpeed = 10", 60],["objects.resourceAmountsr['purple']", 65],["objects.resourceAmounts['red']", 67],["objects.resourceAmounts['blue']", 69],["objects.resourceAmounts['gold']", 70],["print('10s infinite health')", 80], ["print('10s infinite energy')", 90], ["print('key')"]]
 
     def __init__(self, location): 
-        self.image = pygame.image.load("Pixel Images/QuestionCube.png")
+        self.image = pygame.image.load("RPGGameMVP\Pixel Images\QuestionCube.png")
         self.rect = self.image.get_rect()
         self.rect.center = location
         self.type = "qcube"
