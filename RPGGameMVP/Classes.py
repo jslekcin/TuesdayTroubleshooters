@@ -488,7 +488,7 @@ class Wave:
 
 class PotionAbility: 
     types = ["purple","red","blue","gold"]
-    images = [pygame.transform.scale(pygame.image.load("Pixel Images/Purple Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Pixel Images/Red Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Pixel Images/Blue Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Pixel Images/Gold Potion.png"),(50,50))]
+    images = [pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png"),(50,50))]
     number = 0
     def __init__(self): 
         self.image = pygame.image.load("Pixel Images/Poison Effect.png")
