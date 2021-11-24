@@ -1607,7 +1607,7 @@ class PoisonDrop:
         if self.rect.colliderect(objects.player.rect) or self.rect.collidepoint(self.target): 
             objects.currentChunk.contents.append(PoisonPool(self.rect.center))
             objects.currentChunk.contents.remove(self)
-        if not objects.screen.get_rect().contains(self.rect):
+        elif not objects.screen.get_rect().contains(self.rect):
             objects.currentChunk.contents.remove(self)
 
 class PoisonPool:
