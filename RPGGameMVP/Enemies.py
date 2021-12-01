@@ -14,21 +14,21 @@ class Player:
         self.image = pygame.image.load("RPGGameMVP\Pixel Images\Player.png")
         self.rect = self.image.get_rect()
         self.chunk = (0,0)
-        self.currentHealth = 100
-        self.maxEnergy = 100
-        self.maxHealth = 100
+        self.currentHealth = 100000000000000000000000000000000000
+        self.maxEnergy = 1000000000000000000000000000000000000000000000000000
+        self.maxHealth = 1000000000000000000000000000000000000000000
         self.last_valid_postion = self.rect.center
         self.type = "player"
         self.currentAbility = 0
         self.invulnerability = False
         objects.abilities[0] = Abilities.FireArrow()
-        #objects.abilities[1] = Abilities.LaunchFireball() 
-        #objects.abilities[2] = Abilities.Freeze()
-        #objects.abilities[3] = Abilities.ElectroDash()
-        #objects.abilities[4] = Abilities.PoisonField()
-        #objects.abilities[5] = Abilities.SummonAbility()
-        #objects.abilities[6] = Abilities.MagicalShield()
-        #objects.abilities[7] = Abilities.FireLaserArrow()
+        objects.abilities[1] = Abilities.LaunchFireball() 
+        objects.abilities[2] = Abilities.Freeze()
+        objects.abilities[3] = Abilities.ElectroDash()
+        objects.abilities[4] = Abilities.PoisonField()
+        objects.abilities[7] = Abilities.FireLaserArrow()
+        objects.abilities[5] = Abilities.SummonAbility()
+        objects.abilities[6] = Abilities.MagicalShield()
         objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
 
@@ -775,12 +775,14 @@ class FinalBossGhost(Enemy):
                 xDist = 250 - self.rect.center[0]
                 yDist = 150 - self.rect.center[1]
                 totalDist = (xDist**2 + yDist**2)**.5
-                if 25 > totalDist:
+                '''if 25 > totalDist:
                     self.rect.center = (250,150)
                 else:
-                    xSpeed = xDist / totalDist * 25
-                    ySpeed = yDist / totalDist * 25
-                    self.direction = (xSpeed, ySpeed)
+                '''
+                angle = math.atan2(yDist,xDist)
+                xSpeed = math.cos(angle)*25
+                ySpeed = math.sin(angle)*25
+                self.direction = (xSpeed, ySpeed)
         if self.currentState == 1: #Fire 
             if self.rect.left < 0: 
                 self.angle = random.random() * math.pi - math.pi/2
@@ -815,8 +817,8 @@ class FinalBossGhost(Enemy):
                 playerPos = objects.player.rect.center
                 xGap = playerPos[0] - self.rect.centerx
                 yGap = playerPos[1] - self.rect.centery
-                if yGap == 0:
-                    yGap = .01
+                if xGap == 0:
+                    xGap = .01
                 self.iceDir = math.atan(yGap / xGap)
                 if xGap < 0:
                     self.iceDir += math.pi
@@ -953,13 +955,12 @@ class FinalBossGhost(Enemy):
         
         if self.counter > objects.framerate * self.waitTime: 
             self.rect = self.rect.move(self.direction)
-            if self.rect.contains(pygame.Rect(210,110,80,80)): 
+            if self.rect.contains(pygame.Rect(225,125,50,50)): 
                 self.rect.center = (250,150)
                 self.currentState = random.randint(1,8)
                 self.image = self.images[self.currentState] 
                 self.counter = 0
                 self.direction = (0,0)
-            
 
         # Dying
         if self.health <= 0: 
@@ -1120,11 +1121,8 @@ class EnemyIcicle:
             if not objects.player.invulnerability: 
                 objects.player.currentHealth = objects.player.currentHealth - self.attackDamage 
             objects.currentChunk.contents.remove(self)
-
-
-        if not objects.screen.get_rect().contains(self.rect):
+        elif not objects.screen.get_rect().contains(self.rect):
             objects.currentChunk.contents.remove(self)
-
 
 class EnemyFireball:
     def __init__(self,direction,rotationAngle,spawnPos):
