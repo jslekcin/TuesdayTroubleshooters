@@ -123,6 +123,7 @@ class Fireball:
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
             objects.currentChunk.contents.remove(self)
+            return
         for enemy in objects.currentChunk.contents:
             if enemy.type == "enemy" and self.rect.colliderect(enemy.rect):
                 enemy.health -= self.attackDamage
@@ -132,6 +133,7 @@ class Fireball:
                     objects.currentChunk.contents.append(Fireball("small", (-10,0), 180, self.rect.center))
                     objects.currentChunk.contents.append(Fireball("small", (0,-10), 90, self.rect.center))
                     objects.currentChunk.contents.append(Fireball("small", (0,10), 270, self.rect.center))
+                return
 
 class Freeze: 
     def __init__(self):
