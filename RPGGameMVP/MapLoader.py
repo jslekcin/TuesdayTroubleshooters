@@ -61,20 +61,17 @@ objects.chunks[-1].append(Classes.Chunk((objects.mapWidth,0), pygame.image.load(
 objects.chunks[-1][0].contents.append(Classes.CollisionButton(pygame.image.load("RPGGameMVP\Pixel Images\DoorFromInside.png"), (250, 475), ["objects.player.chunk = (0,0)","objects.player.rect.center = (400,200)"]))
 
 # Fire Boss Dungeon
-createDungeon(1, Classes.FireGhostBoss(), (450, 350), (objects.mapWidth,0), 
-pygame.image.load("RPGGameMVP\Pixel Images\FireBossBackground.png"), pygame.image.load("RPGGameMVP\Pixel Images\FirePortal.png"), "fire dungeon")
+createDungeon(1, Classes.FireGhostBoss(), (450, 350), (objects.mapWidth,0), pygame.image.load("RPGGameMVP\Pixel Images\FireBossBackground.png"), pygame.image.load("RPGGameMVP\Pixel Images\FirePortal.png"), "fire dungeon")
 
 # Ice Boss Dungeon
 createDungeon(2, Classes.IceGhostBoss(), (450,250), (objects.mapWidth,0), pygame.image.load("RPGGameMVP\Pixel Images\Ice Boss Background.png"), pygame.image.load("RPGGameMVP\Pixel Images\Ice Portal.png"), "ice dungeon")
 
 
 # Lightning Boss Dungeon
-createDungeon(3, Classes.LightningGhostBoss(), (450, 150), (objects.mapWidth,0), 
-pygame.image.load("RPGGameMVP\Pixel Images\Lightning Boss Background.png"), pygame.image.load("RPGGameMVP\Pixel Images\Lightning Portal.png"), "lightning dungeon")
+createDungeon(3, Classes.LightningGhostBoss(), (450, 150), (objects.mapWidth,0), pygame.image.load("RPGGameMVP\Pixel Images\Lightning Boss Background.png"), pygame.image.load("RPGGameMVP\Pixel Images\Lightning Portal.png"), "lightning dungeon")
 
 # Poison boss
-createDungeon(4, Classes.PoisonGhostBoss(), (450, 50), (objects.mapWidth, 0),
-pygame.image.load("RPGGameMVP\Pixel Images\Poison Boss Background.png"), pygame.image.load("RPGGameMVP\Pixel Images\Poison Portal.png"), "poison dungeon")
+createDungeon(4, Classes.PoisonGhostBoss(), (450, 50), (objects.mapWidth, 0),pygame.image.load("RPGGameMVP\Pixel Images\Poison Boss Background.png"), pygame.image.load("RPGGameMVP\Pixel Images\Poison Portal.png"), "poison dungeon")
 
 # Summoning Boss 
 createDungeon(5, Classes.SummoningGhostBoss(), (50,50),(objects.mapWidth,0),pygame.image.load("RPGGameMVP\Pixel Images\Grass.png"), pygame.image.load("RPGGameMVP\Pixel Images\Summoning Portal.png"), "summoning dungeon")
@@ -94,20 +91,6 @@ objects.chunks[7][8].contents.append(Classes.MovementBarrier(image,(250,250)))
 
 # Final Boss 
 createDungeon(9, Classes.FinalBossGhost(), (250,250),(objects.mapWidth,0),pygame.image.load("RPGGameMVP\Pixel Images\Grass.png"), pygame.image.load("RPGGameMVP\Pixel Images\Summoning Portal.png"), "final dungeon")
-
-# Chaotic Fun
-objects.chunks[0][2].contents.append(Classes.FireGhostBoss())
-objects.chunks[0][2].contents.append(Classes.IceGhostBoss())
-objects.chunks[0][2].contents.append(Classes.LightningGhostBoss())
-objects.chunks[0][2].contents.append(Classes.PoisonGhostBoss())
-objects.chunks[0][2].contents.append(Classes.SummoningGhostBoss())
-objects.chunks[0][2].contents.append(Classes.ShieldGhostBoss())
-objects.chunks[0][2].contents.append(Classes.LaserGhostBoss())
-
-
-
-
-
 
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]
