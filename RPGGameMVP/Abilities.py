@@ -123,6 +123,7 @@ class Fireball:
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
             objects.currentChunk.contents.remove(self)
+            return
         for enemy in objects.currentChunk.contents:
             if enemy.type == "enemy" and self.rect.colliderect(enemy.rect):
                 enemy.health -= self.attackDamage
@@ -132,6 +133,7 @@ class Fireball:
                     objects.currentChunk.contents.append(Fireball("small", (-10,0), 180, self.rect.center))
                     objects.currentChunk.contents.append(Fireball("small", (0,-10), 90, self.rect.center))
                     objects.currentChunk.contents.append(Fireball("small", (0,10), 270, self.rect.center))
+                return
 
 class Freeze: 
     def __init__(self):
@@ -139,7 +141,7 @@ class Freeze:
     def update(self):
         if objects.resourceAmounts["ghostEnergy"] < self.cost:
             return
-        if pygame.mouse.get_pressed(3)[0] and Freeze.timer == Freeze.cooldown:
+        if pygame.mouse.get_pressed(3)[0] and Freeze.timer == Freeze.cooldown and objects.resourceAmounts["ghostEnergy"] <= self.cost:
             objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] - self.cost
             objects.freeze = True
 
@@ -159,7 +161,7 @@ class ElectroDash:
     def __init__(self):
         self.fireRate = .1 * objects.framerate
         self.cooldown = 0
-        self.cost = 15
+        self.cost = 25
         self.dashSpeed = 25
         self.damage = 25
         self.dashPositions = []
@@ -191,6 +193,7 @@ class ElectroDash:
             return
 
         if len(self.dashPositions) == 0 and pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+            objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = pygame.mouse.get_pos()
             # Find the incremental amount to get there
             totalXdist = mousePos[0]-objects.player.rect.centerx
@@ -223,7 +226,7 @@ class PoisonField:
         self.image.set_alpha(150)
         self.cooldown = 0
         self.duration = 5 * objects.framerate
-        self.cost = 0
+        self.cost = 25
         self.damage = 1
         self.rect = self.image.get_rect()
     def update(self): 
@@ -254,6 +257,7 @@ class SummonAbility:
         self.active = False
         self.counter = 0
         self.lastChunk = (0,0)
+        self.cost = 25
     def render(self): 
         if self.active: 
             self.image.set_alpha(((objects.framerate * 10) - self.counter)/(objects.framerate * 10)*200+55)
@@ -264,7 +268,8 @@ class SummonAbility:
         if objects.currentChunk != self.lastChunk:
             self.rect.center = objects.player.rect.center
 
-        if pygame.mouse.get_pressed(3)[0]: 
+        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+            objects.resourceAmounts["ghostEnergy"] -= self.cost 
             self.active = True
             self.rect.center = objects.player.rect.center
         if self.active:
@@ -292,7 +297,7 @@ class MagicalShield:
         self.rect = self.image.get_rect() 
         self.cooldown = 0
         self.duration = 5 * objects.framerate
-        self.cost = 0
+        self.cost = 25
         self.active = False
     def render(self): 
         if self.active: 
@@ -313,7 +318,7 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
     def __init__(self):
         self.fireRate = .5 * objects.framerate
         self.cooldown = 0
-
+        self.cost = 25
     def update(self):
         if self.cooldown > 0:
             self.cooldown -= 1
@@ -322,7 +327,8 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
         if objects.currentChunk == None:
             return
 
-        if pygame.mouse.get_pressed(3)[0]:
+        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+            objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = pygame.mouse.get_pos()
             mouseX = mousePos[0]
             mouseY = mousePos[1]
@@ -370,7 +376,7 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
     def __init__(self):
         self.fireRate = .5 * objects.framerate
         self.cooldown = 0
-
+        self.cost = 25
     def update(self):
         if self.cooldown > 0:
             self.cooldown -= 1
@@ -379,7 +385,8 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
         if objects.currentChunk == None:
             return
 
-        if pygame.mouse.get_pressed(3)[0]:
+        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+            objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = pygame.mouse.get_pos()
             mouseX = mousePos[0]
             mouseY = mousePos[1]

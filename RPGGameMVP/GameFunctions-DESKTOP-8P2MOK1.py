@@ -67,7 +67,7 @@ def GameplayUpdate():
         objects.player.move(objects.moveSpeed,0)
     if keys[pygame.K_i]: # Game Information
         print("INFORMATION: ")
-        print("Current Quest: "+objects.quests[objects.currentQuest]) 
+        print("Current Quest: "+objects.quests[objects.currentQuest].name) 
         print("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))
         print("Coins: "+str(objects.resourceAmounts["coins"]))
         print("Potions: "+str(objects.potions)) 
