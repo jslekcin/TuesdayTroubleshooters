@@ -43,6 +43,8 @@ currentProblem = ['a','b','c','d']
     [(7, 0) Shop, (7, 0) fire dungeon, (7, 0) ice dungeon, (7, 0) lightning dungeon]
 ]
 """
+
+
 # we have a 7, 7 map meaning chunks are two dimensional list and 7 by 7
 # Every index in the 2D list houses a "Chunk" object
 # Every thing displayed on a chunk is housed in the chunks "contents" variable, that is including portals

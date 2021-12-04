@@ -1,5 +1,7 @@
 import pygame
-import Classes
+import MapClasses
+import Abilities 
+import Enemies
 import objects
 import random
 import MapLoader
@@ -10,15 +12,15 @@ pygame.init()
 
 buttons = {
     "game": [], 
-    "menu": [Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\StartButton.png"), (500,100)),(250,450), ['objects.gamestate = 1','objects.Reset()']), Classes.Button(pygame.image.load("RPGGameMVP\Pixel Images\AboutUsButton.png"),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+    "menu": [MapClasses.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\StartButton.png"), (500,100)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.image.load("RPGGameMVP\Pixel Images\AboutUsButton.png"),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
-    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
-    Classes.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
-    Classes.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
+    MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
-objects.player = Classes.Player()
+objects.player = Enemies.Player()
 
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
@@ -38,14 +40,14 @@ def NightEvent():
             if enemies is False: 
                 if chunk != objects.chunks[0][0] and chunk != objects.currentChunk: 
                     for i in range(random.randint(1,5)):
-                        chunk.contents.append(Classes.Ghost((random.randint(0,500),random.randint(0,500))))
+                        chunk.contents.append(Enemies.Ghost((random.randint(0,500),random.randint(0,500))))
     print("REPORT: Ghosts have appeared in uninhabited areas.")
     # Spawning a large ghost in uninhabited chunks
     chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
     while chunk == objects.chunks[0][0] or chunk == objects.currentChunk:
         chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
     print(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
-    chunk.contents.append(Classes.LargeGhost((250,250)))
+    chunk.contents.append(Enemies.LargeGhost((250,250)))
 
 dayNightCounter = 0
 def GameplayUpdate():
@@ -158,7 +160,7 @@ def GameplayUpdate():
         for thing in objects.currentChunk.contents: 
             if thing.type != 'enemy': 
                 thing.update()
-        Classes.Freeze.freezeCD()
+        Abilities.Freeze.freezeCD()
     else: 
         objects.currentChunk.update()
     objects.player.update()
@@ -324,7 +326,7 @@ def MathUpdate():
                     i[2] = True
             if answerString != "" and enter.collidepoint(mousePos):
                 if eval(answerString) == 24 or eval(answerString) == 23.99999999999999:
-                    Classes.QuestionCube.randBoost()
+                    MapClasses.QuestionCube.randBoost()
                 objects.gamestate = 1 # no boost
                 answerString = ""
                 
