@@ -14,9 +14,9 @@ class Player:
         self.image = pygame.image.load("RPGGameMVP\Pixel Images\Player.png")
         self.rect = self.image.get_rect()
         self.chunk = (0,0)
-        self.currentHealth = 100000000000000000000000000000000000
+        self.currentHealth = 100
         self.maxEnergy = 1000000000000000000000000000000000000000000000000000
-        self.maxHealth = 1000000000000000000000000000000000000000000
+        self.maxHealth = 100
         self.last_valid_postion = self.rect.center
         self.type = "player"
         self.currentAbility = 0
