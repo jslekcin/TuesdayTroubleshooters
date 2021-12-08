@@ -93,6 +93,8 @@ objects.chunks[7][8].contents.append(MapClasses.MovementBarrier(image,(250,250))
 # Final Boss 
 createDungeon(9, Enemies.FinalBossGhost(), (250,250),(objects.mapWidth,0),pygame.image.load("RPGGameMVP\Pixel Images\Grass.png"), pygame.image.load("RPGGameMVP\Pixel Images\Summoning Portal.png"), "final dungeon")
 
+objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (250,250)))
+
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]
     #objects.chunks[3][3].contents.append(

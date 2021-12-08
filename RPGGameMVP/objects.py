@@ -143,3 +143,14 @@ def LoadMath():
         problems = mathQuestions[(difficulty*400):((difficulty+1)*400)]
     else: 
         problems = mathQuestions[1200:]
+
+
+class Point: 
+    def __init__(self, position): 
+        self.color = (255,0,0) 
+        self.position = position
+        self.type = "marker"
+    def render(self): 
+        pygame.draw.circle(screen, self.color, self.position, 5)
+    def update(self): 
+        pass

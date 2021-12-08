@@ -55,7 +55,14 @@ def GameplayUpdate():
         quest.update()
 
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
-    objects.player.last_valid_position = objects.player.rect.center
+    if objects.currentChunk != None: 
+        hit = False 
+        for i in objects.currentChunk.contents: 
+            if i.type == "obstacle": 
+                if objects.player.rect.colliderect(i.rect): 
+                    hit = True
+        if not hit: 
+            objects.player.last_valid_position = objects.player.rect.center
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP] or keys[pygame.K_w]:
         objects.player.move(0,-objects.moveSpeed)

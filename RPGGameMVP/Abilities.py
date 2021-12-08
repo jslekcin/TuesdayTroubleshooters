@@ -168,6 +168,14 @@ class ElectroDash:
 
     def update(self):
         if len(self.dashPositions) != 0:
+            #objects.currentChunk.contents.append(objects.Point(objects.player.last_valid_position))
+            # Checking for collision with an obstacle
+            for thing in objects.currentChunk.contents: 
+                if thing.type == "obstacle" and objects.player.rect.colliderect(thing.rect): 
+                    self.dashPositions = [] 
+                    objects.player.rect.center = objects.player.last_valid_position
+                    return
+            
             # Move to first postition in list
             objects.player.rect.center = self.dashPositions[0]
             # Remove position

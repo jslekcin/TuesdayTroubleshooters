@@ -87,15 +87,10 @@ class Obstacle:
         self.rect = self.image.get_rect()
         self.rect.center = location
         self.type = "obstacle"
-        self.interact = ["player", "arrow"]
+        self.interact = ["arrow"]
     def render(self):
         objects.screen.blit(self.image, self.rect)
     def update(self):
-        for obj in objects.currentChunk.contents:
-            if obj.type in self.interact: 
-                if self.rect.colliderect(obj.rect): 
-                    if obj.type == "arrow": 
-                        objects.currentChunk.contents.remove(obj)
         if self.rect.colliderect(objects.player.rect): 
             objects.player.rect.center = objects.player.last_valid_position
 
