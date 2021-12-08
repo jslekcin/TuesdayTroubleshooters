@@ -68,7 +68,7 @@ class LaunchFireball:
     def __init__(self):
         self.fireRate = .1 * objects.framerate
         self.cooldown = 0
-        self.cost = 10
+        self.cost = 0
 
     def update(self):
         if self.cooldown > 0:
@@ -94,7 +94,17 @@ class LaunchFireball:
                 rotation =  math.degrees(math.atan(xGap / yGap)) + 90
                 if yGap > 0:
                     rotation += 180
-                objects.currentChunk.contents.append(Fireball("large", (moveX, moveY), rotation, None))
+                level = objects.levels[0] 
+                if level == 1: 
+                    objects.currentChunk.contents.append(Fireball("medium", "small", None, (moveX, moveY), rotation, objects.player.rect.center))
+                elif level == 2: 
+                    objects.currentChunk.contents.append(Fireball("large", "small", None, (moveX, moveY), rotation, objects.player.rect.center))
+                elif level == 3: 
+                    objects.currentChunk.contents.append(Fireball("medium", "medium", "small", (moveX, moveY), rotation, objects.player.rect.center))
+                elif level == 4: 
+                    objects.currentChunk.contents.append(Fireball("medium", "large", "small", (moveX, moveY), rotation, objects.player.rect.center))
+                elif level == 5: 
+                    objects.currentChunk.contents.append(Fireball("large", "large", "small", (moveX, moveY), rotation, objects.player.rect.center))
             self.cooldown = self.fireRate
             objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] - self.cost
 
@@ -102,18 +112,19 @@ class LaunchFireball:
         return
 
 class Fireball:
-    def __init__(self,size,direction,rotationAngle, position):
+    def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
         self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png")
         self.size = size
-        self.attackDamage = 20
+        self.dropsize = dropsize
+        self.dropsize2 = dropsize2
+        self.attackDamage = 10
         if self.size == "small": 
             self.image = pygame.transform.scale(self.image, (20,10))
-            self.attackDamage = 10
+        elif self.size == "large": 
+            self.image = pygame.transform.scale(self.image, (80,40))
         self.image = pygame.transform.rotate(self.image, rotationAngle)
         self.rect = self.image.get_rect()
-        self.rect.center = objects.player.rect.center
-        if self.size == "small": 
-            self.rect.center = position
+        self.rect.center = position
         self.direction = direction
         self.type = "fireball"
     def render(self):
@@ -123,16 +134,39 @@ class Fireball:
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
             objects.currentChunk.contents.remove(self)
+            if self.size == "medium":
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (10,0), 0, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-10,0), 180, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,-10), 90, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,10), 270, self.rect.center))
+            elif self.size == "large": 
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (10,0), 0, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-10,0), 180, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,-10), 90, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,10), 270, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (7,7), 315, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-7,7), 225, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-7,-7), 135, self.rect.center))
+                objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (7,-7), 45, self.rect.center))
             return
         for enemy in objects.currentChunk.contents:
             if enemy.type == "enemy" and self.rect.colliderect(enemy.rect):
                 enemy.health -= self.attackDamage
                 objects.currentChunk.contents.remove(self)
-                if self.size != "small": 
-                    objects.currentChunk.contents.append(Fireball("small", (10,0), 0, self.rect.center))
-                    objects.currentChunk.contents.append(Fireball("small", (-10,0), 180, self.rect.center))
-                    objects.currentChunk.contents.append(Fireball("small", (0,-10), 90, self.rect.center))
-                    objects.currentChunk.contents.append(Fireball("small", (0,10), 270, self.rect.center))
+                if self.size == "medium":
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (10,0), 0, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-10,0), 180, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,-10), 90, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,10), 270, self.rect.center))
+                elif self.size == "large": 
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (10,0), 0, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-10,0), 180, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,-10), 90, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (0,10), 270, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (7,7), 315, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-7,7), 225, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (-7,-7), 135, self.rect.center))
+                    objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (7,-7), 45, self.rect.center))
                 return
 
 class Freeze: 

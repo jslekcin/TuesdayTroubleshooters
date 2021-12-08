@@ -71,6 +71,7 @@ daytime = True
 freeze = False
 abilities = [None, None, None, None, None, None, None, None, None, None]
 abilityPanel = []
+levels = [1,1,1,1,1,1,1,1]
 shopShowing = False
 quests = []
 #"Find the Fire Key! ","Defeat the Fire Ghost! ","Find the Ice Key! ","Defeat the Ice Ghost! ","Find the Lightning Key! ","Defeat the Lightning Ghost! ","Find the Poison Key! ","Defeat the Poison Ghost! ","Find the Summoning Key! ","Defeat the Summoner Ghost! ","Find the Shield Key! ","Defeat the Shield Ghost! ","Find the Laser Key! ","Defeat the Laser Ghost! ","Find the Water Key! ","Defeat the Water Ghost! ","Find the Boss Key! ","Defeat the Dark Ghost! "]
@@ -96,6 +97,7 @@ def FindQuest(name):
         if quest.name == name:
             return quest
             break
+
 
 # all of the following values are read and write.
 # we are actually changing out the box sometimes

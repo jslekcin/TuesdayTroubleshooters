@@ -102,6 +102,16 @@ def GameplayUpdate():
             objects.player.currentAbility = 8
         if event.key == pygame.K_0 and objects.abilities[9] != None:  
             objects.player.currentAbility = 9
+        # Changing ability level 
+        if event.key == pygame.K_l: 
+            for i in range(8): 
+                level = objects.levels[i]
+                level += 1 
+                if level > 5: 
+                    level = 1
+                objects.levels[i] = level
+            print(objects.levels)
+
     # Using Scrollwheel
     for event in pygame.event.get(pygame.MOUSEWHEEL): 
         if event.y > 0:
