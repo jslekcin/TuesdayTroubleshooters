@@ -5,6 +5,8 @@ import math
 import time
 import webbrowser
 import Abilities
+from BasicClasses import Obj
+
 
 # Quest System Steps
 
@@ -65,56 +67,39 @@ class Quest:
             self.complete = True
 
 # Resource Class
-class Resource: 
-    def __init__(self, item, quantity, image, location):
+class Resource(Obj): 
+    def __init__(self, item, quantity, location):
+        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Gold Coin.png"), location)
         self.item = item
         self.quantity = quantity
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Gold Coin.png")
-        #self.image = pygame.transform.scale(self.image, (10,10))
-        self.rect = self.image.get_rect()
-        self.rect.center = location
         self.type = "resource"
-    def render(self): 
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         if objects.player.rect.colliderect(self.rect):
             objects.currentChunk.contents.remove(self)
             objects.resourceAmounts["coins"] += 10
 
-class Obstacle: 
+class Obstacle(Obj): 
     def __init__(self, image, location): 
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.type = "obstacle"
         self.interact = ["arrow"]
-    def render(self):
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         return
         if self.rect.colliderect(objects.player.rect): 
             objects.player.rect.center = objects.player.last_valid_position
 
-class MovementBarrier: 
+class MovementBarrier(Obj): 
     def __init__(self, image, location): 
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.type = "obstacle"
-    def render(self):
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         if self.rect.colliderect(objects.player.rect): 
             objects.player.rect.center = objects.player.last_valid_position
 
-class Button: 
+class Button(Obj): 
     def __init__(self, image, location, effects):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.effects = effects
-    def render(self): 
-        objects.screen.blit(self.image, self.rect)
     def update(self): 
         if pygame.mouse.get_pressed(3)[0]:
             mousePos = pygame.mouse.get_pos()
@@ -122,15 +107,11 @@ class Button:
                 for action in self.effects:
                     exec(action)
 
-class NPC: 
+class NPC(Obj): 
     def __init__(self, image, location, effects):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.effects = effects
         self.type = "NPC" #TODO: wait till up before being pressed down
-    def render (self): 
-        objects.screen.blit(self.image, self.rect)
     def update(self): 
         if pygame.mouse.get_pressed(3)[0]:
             mousePos = pygame.mouse.get_pos()
@@ -138,17 +119,13 @@ class NPC:
                 for action in self.effects:
                     exec(action)
 
-class Building:
+class Building(Obj):
     def __init__(self, image, location, subchunk, doorSize):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.subchunk = subchunk
         self.type = "building"
         self.doorRect = pygame.Rect((0,0), doorSize)
         self.doorRect.midbottom = self.rect.midbottom
-    def render(self):
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         if objects.player.rect.colliderect(self.doorRect): 
             objects.player.chunk = (objects.mapWidth, self.subchunk)
@@ -163,30 +140,23 @@ class Building:
         #if self.rect.colliderect(objects.player.rect): 
         #    if objects.player.rect.center = objects.player.last_valid_position
 
-class CollisionButton: 
+class CollisionButton(Obj): 
     def __init__(self, image, location, effects): 
         self.effects = effects
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        super().__init__(image, location)
         self.type = "collisionButton"
-    def render(self): 
-        objects.screen.blit(self.image, self.rect)
     def update(self): 
         if objects.player.rect.colliderect(self.rect): 
             for effect in self.effects: 
                 exec(effect)
 
-class QuestionCube: 
+class QuestionCube(Obj): 
     boosts = [["objects.player.currentHealth += 25", 25], ["objects.resourceAmounts['ghostEnergy'] += 25", 50], ["objects.moveSpeed = 10", 60],["objects.resourceAmountsr['purple']", 65],["objects.resourceAmounts['red']", 67],["objects.resourceAmounts['blue']", 69],["objects.resourceAmounts['gold']", 70],["print('10s infinite health')", 80], ["print('10s infinite energy')", 90], ["print('key')"]]
 
     def __init__(self, location): 
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\QuestionCube.png")
-        self.rect = self.image.get_rect()
-        self.rect.center = location
+        image = pygame.image.load("RPGGameMVP\Pixel Images\QuestionCube.png")
+        super().__init__(image, location)
         self.type = "qcube"
-    def render(self): 
-        objects.screen.blit(self.image, self.rect)
     def update(self): 
         if objects.player.rect.colliderect(self.rect): 
             objects.currentChunk.contents.remove(self)

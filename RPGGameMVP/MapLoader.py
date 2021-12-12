@@ -40,7 +40,7 @@ for x in range(objects.mapWidth):
             for e in range(enemyNum): 
                 objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
         for coin in range(coinNum): 
-            objects.chunks[x][y].contents.append(MapClasses.Resource("coins", 10, pygame.transform.scale(pygame.image.load("RPGGameMVP\Pixel Images\Gold Coin.png"), (15,15)), (random.randint(0,500),random.randint(0,500))))
+            objects.chunks[x][y].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
 
 # Manual addition of objects to chunks
 #objects.chunks[0][1].contents.append(
