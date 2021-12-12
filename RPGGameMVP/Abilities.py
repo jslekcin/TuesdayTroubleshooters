@@ -40,18 +40,14 @@ class FireArrow(): # Ability 1: Fires an arrow projectile
     def render(self):
         return
 
-class Arrow:
+class Arrow(Obj):
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Arrow.png")
-        self.image = pygame.transform.rotate(self.image, rotationAngle)
-        self.rect = self.image.get_rect()
-        self.rect.center = objects.player.rect.center
+        image = pygame.image.load("RPGGameMVP\Pixel Images\Arrow.png")
+        image = pygame.transform.rotate(image, rotationAngle)
+        super().__init__(image, objects.player.rect.center)
         self.direction = direction
         self.attackDamage = 10
         self.type = "arrow"
-    def render(self):
-        #pygame.draw.rect(objects.screen, "#000000", self.rect) 
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
@@ -112,9 +108,9 @@ class LaunchFireball:
     def render(self):
         return
 
-class Fireball:
+class Fireball(Obj):
     def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png")
+        super().init(pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png"), position)
         self.size = size
         self.dropsize = dropsize
         self.dropsize2 = dropsize2
@@ -124,13 +120,9 @@ class Fireball:
         elif self.size == "large": 
             self.image = pygame.transform.scale(self.image, (80,40))
         self.image = pygame.transform.rotate(self.image, rotationAngle)
-        self.rect = self.image.get_rect()
-        self.rect.center = position
         self.direction = direction
         self.type = "fireball"
-    def render(self):
-        #pygame.draw.rect(objects.screen, "#000000", self.rect) 
-        objects.screen.blit(self.image, self.rect)
+
     def update(self):
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
@@ -264,15 +256,15 @@ class ElectroDash:
     def render(self):
         return
 
-class PoisonField: 
+class PoisonField(Obj): 
     def __init__(self): 
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Effect.png")
-        self.image.set_alpha(150)
+        image = pygame.image.load("RPGGameMVP\Pixel Images\Poison Effect.png")
+        image.set_alpha(150)
+        super().__init__(image)
         self.cooldown = 0
         self.duration = 5 * objects.framerate
         self.cost = 25
         self.damage = 1
-        self.rect = self.image.get_rect()
     def update(self): 
         if self.cooldown == 0 and pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
             self.cooldown = self.duration
@@ -290,13 +282,11 @@ class PoisonField:
             # render image # TODO: make a render method for all of our abilities so that this can render after our map
             objects.screen.blit(self.image, self.rect)
 
-class SummonAbility:
+class SummonAbility(Obj):
     def __init__(self): 
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Ghost Enemy.png")
+        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Ghost Enemy.png"), (250,250))
         self.speed = 10
         self.attackDamage = 20
-        self.rect = self.image.get_rect()
-        self.rect.center = (250,250)
         self.type = "projectile"
         self.active = False
         self.counter = 0
@@ -335,10 +325,9 @@ class SummonAbility:
                 self.active = False    
             self.counter += 1
 
-class MagicalShield: 
+class MagicalShield(Obj): 
     def __init__(self): 
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Magical Shield.png")
-        self.rect = self.image.get_rect() 
+        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Magical Shield.png"))
         self.cooldown = 0
         self.duration = 5 * objects.framerate
         self.cost = 25
@@ -394,20 +383,17 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
     def render(self):
         return
 
-class LaserArrow:
+class LaserArrow(Obj):
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Laser Arrow.png")
-        self.image = pygame.transform.scale(self.image, (40,10))
-        self.image = pygame.transform.rotate(self.image, rotationAngle)
+        image = pygame.image.load("RPGGameMVP\Pixel Images\Laser Arrow.png")
+        image = pygame.transform.scale(image, (40,10))
+        image = pygame.transform.rotate(image, rotationAngle)
         
-        self.rect = self.image.get_rect()
-        self.rect.center = objects.player.rect.center
+        super().__init__(image, objects.player.rect.center)
+        
         self.direction = direction
         self.attackDamage = 25
         self.type = "laserarrow"
-    def render(self):
-        #pygame.draw.rect(objects.screen, "#000000", self.rect) 
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         self.rect = self.rect.move(self.direction)
         if not objects.screen.get_rect().contains(self.rect):
@@ -455,22 +441,18 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
     def render(self):
         return
 
-class Wave:
+class Wave(Obj):
     def __init__(self,direction,rotationAngle):
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Wave.png")
+        image = pygame.image.load("RPGGameMVP\Pixel Images\Wave.png")
         if rotationAngle > 360: 
             rotationAngle -= 360
-        self.image = pygame.transform.scale(self.image, (100,200))
-        self.image = pygame.transform.rotate(self.image, rotationAngle)
-    
-        self.rect = self.image.get_rect()
-        self.rect.center = objects.player.rect.center
+        image = pygame.transform.scale(image, (100,200))
+        image = pygame.transform.rotate(image, rotationAngle)
+
+        super().__init__(image, objects.player.rect.center)
         self.direction = direction
         self.attackDamage = 1
         self.type = "wave"
-    def render(self):
-        #pygame.draw.rect(objects.screen, "#000000", self.rect) 
-        objects.screen.blit(self.image, self.rect)
     def update(self):
         self.rect = self.rect.move(self.direction)
         if not self.rect.colliderect(pygame.Rect(0,0,500,500)):
