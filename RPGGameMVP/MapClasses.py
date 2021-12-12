@@ -84,9 +84,8 @@ class Obstacle(Obj):
         self.type = "obstacle"
         self.interact = ["arrow"]
     def update(self):
-        return
         if self.rect.colliderect(objects.player.rect): 
-            objects.player.rect.center = objects.player.last_valid_position
+            objects.player.hit_this_frame = True
 
 class MovementBarrier(Obj): 
     def __init__(self, image, location): 
@@ -94,7 +93,7 @@ class MovementBarrier(Obj):
         self.type = "obstacle"
     def update(self):
         if self.rect.colliderect(objects.player.rect): 
-            objects.player.rect.center = objects.player.last_valid_position
+            objects.player.hit_this_frame = True
 
 class Button(Obj): 
     def __init__(self, image, location, effects):

@@ -4,15 +4,15 @@ import Abilities
 import math 
 import random
 import MapClasses
+from BasicClasses import Obj
 
 #IMPORTANT: This includes the player 
 
 # Creating Player Class
-class Player:
+class Player(Obj):
     # Player Setup
     def __init__(self):
-        self.image = pygame.image.load("RPGGameMVP\Pixel Images\Player.png")
-        self.rect = self.image.get_rect()
+        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Player.png"))
         self.chunk = (0,0)
         self.currentHealth = 100
         self.maxEnergy = 100
@@ -21,6 +21,9 @@ class Player:
         self.type = "player"
         self.currentAbility = 0
         self.invulnerability = False
+        self.hit_this_frame = False
+
+        # Debug all powers immediately
         objects.abilities[0] = Abilities.FireArrow()
         objects.abilities[1] = Abilities.LaunchFireball() 
         objects.abilities[2] = Abilities.Freeze()
@@ -36,7 +39,7 @@ class Player:
     # Function to draw player to screen
     def render(self):
         # pygame.draw.rect(objects.screen, "#000000", self.rect)
-        objects.screen.blit(self.image, self.rect)
+        super().render()
         objects.abilities[objects.player.currentAbility].render()
         if self.currentHealth > self.maxHealth: 
             self.currentHealth = self.maxHealth
@@ -45,8 +48,48 @@ class Player:
     def move(self, x, y): 
         #self.last_valid_position = self.rect.center
         self.rect = self.rect.move(x,y)
+    def pos_validate(self):
+        
+        if self.rect.center[0] < 0: # Moving off left of screen
+            if self.chunk[0] == -1 or self.chunk[0] == 0: # If in subchunk or leftmost chunk and boss fights.
+                self.rect.centerx = 0 # Move flush to wall
+            else:
+                self.chunk = (self.chunk[0]-1, self.chunk[1])
+                print(f'REPORT: Current chunk is {self.chunk}')
+                self.rect.centerx = objects.width
+        
+        if self.rect.center[0] > objects.width: # Moving off right of screen
+            if self.chunk[0] == -1  or self.chunk[0] == objects.mapWidth-1:
+                self.rect.centerx = objects.width 
+            else:
+                self.chunk = (self.chunk[0]+1, self.chunk[1])
+                print(f'REPORT: Current chunk is {self.chunk}')
+                self.rect.centerx = 0
+        
+        if self.rect.center[1] < 0: # Moving off top of screen
+            if self.chunk[0] == -1  or self.chunk[1] == 0:
+                self.rect.centery = 0
+            else:
+                self.chunk = (self.chunk[0],self.chunk[1]-1)
+                print(f'REPORT: Current chunk is {self.chunk}')
+                self.rect.centery = objects.height
+            
+        if self.rect.center[1] > objects.width: # Moving off bottom of screen
+            if self.chunk[0] == -1  or self.chunk[1] == objects.mapHeight-1:
+                self.rect.centery = objects.height
+            else:  
+                self.chunk = (self.chunk[0],self.chunk[1]+1)
+                print(f'REPORT: Current chunk is {self.chunk}')
+                self.rect.centery = 0
+
+        
+        if self.hit_this_frame:
+            self.rect.center = self.last_valid_postion
+            self.hit_this_frame = False
+        self.last_valid_postion = self.rect.center
     def update(self):
-        objects.abilities[objects.player.currentAbility].update()
+        objects.abilities[self.currentAbility].update()
+        self.pos_validate()
 
 
 class Enemy: 

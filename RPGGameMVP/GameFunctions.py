@@ -55,14 +55,7 @@ def GameplayUpdate():
         quest.update()
 
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
-    if objects.currentChunk != None: 
-        hit = False 
-        for i in objects.currentChunk.contents: 
-            if i.type == "obstacle": 
-                if objects.player.rect.colliderect(i.rect): 
-                    hit = True
-        if not hit: 
-            objects.player.last_valid_position = objects.player.rect.center
+    objects.player.last_valid_position = objects.player.rect.center
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP] or keys[pygame.K_w]:
         objects.player.move(0,-objects.moveSpeed)
@@ -138,40 +131,7 @@ def GameplayUpdate():
             print("REPORT: It is now nighttime")
             NightEvent()
         dayNightCounter = 0
-    
-    if objects.player.rect.center[0] < 0: # Moving off left of screen
-        if objects.player.chunk[0] == -1 or objects.player.chunk[0] == 0: # If in subchunk or leftmost chunk and boss fights.
-            objects.player.rect.centerx = 0 # Move flush to wall
-        else:
-            objects.player.chunk = (objects.player.chunk[0]-1, objects.player.chunk[1])
-            print(f'REPORT: Current chunk is {objects.player.chunk}')
-            objects.player.rect.centerx = objects.width
-            #objects.player.move(objects.width, 0)
-    
-    if objects.player.rect.center[0] > objects.width: # Moving off right of screen
-        if objects.player.chunk[0] == -1  or objects.player.chunk[0] == objects.mapWidth-1:
-            objects.player.rect.centerx = objects.width 
-        else:
-            objects.player.chunk = (objects.player.chunk[0]+1, objects.player.chunk[1])
-            print(f'REPORT: Current chunk is {objects.player.chunk}')
-            objects.player.rect.centerx = 0
-    
-    if objects.player.rect.center[1] < 0: # Moving off top of screen
-        if objects.player.chunk[0] == -1  or objects.player.chunk[1] == 0:
-            objects.player.rect.centery = 0
-        else:
-            objects.player.chunk = (objects.player.chunk[0],objects.player.chunk[1]-1)
-            print(f'REPORT: Current chunk is {objects.player.chunk}')
-            objects.player.rect.centery = objects.height
-         
-    if objects.player.rect.center[1] > objects.width: # Moving off bottom of screen
-        if objects.player.chunk[0] == -1  or objects.player.chunk[1] == objects.mapHeight-1:
-            objects.player.rect.centery = objects.height
-        else:  
-            objects.player.chunk = (objects.player.chunk[0],objects.player.chunk[1]+1)
-            print(f'REPORT: Current chunk is {objects.player.chunk}')
-            objects.player.rect.centery = 0
-    
+        
     objects.currentChunk = objects.chunks[objects.player.chunk[0]][objects.player.chunk[1]]
     if objects.freeze == True: 
         for thing in objects.currentChunk.contents: 
