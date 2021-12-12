@@ -91,6 +91,7 @@ class Obstacle:
     def render(self):
         objects.screen.blit(self.image, self.rect)
     def update(self):
+        return
         if self.rect.colliderect(objects.player.rect): 
             objects.player.rect.center = objects.player.last_valid_position
 
