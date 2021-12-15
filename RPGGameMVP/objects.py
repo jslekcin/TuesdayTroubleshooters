@@ -31,19 +31,6 @@ gamestate = 0
 chunks = []
 mathQuestions = None
 currentProblem = ['a','b','c','d']
-"""
-[
-    [(0, 0) Overworld, (0, 1) Overworld, (0, 2) Overworld, (0, 3) Overworld, (0, 4) Overworld, (0, 5) Overworld, (0, 6) Overworld],
-    [(1, 0) Overworld, (1, 1) Overworld, (1, 2) Overworld, (1, 3) Overworld, (1, 4) Overworld, (1, 5) Overworld, (1, 6) Overworld],
-    [(2, 0) Overworld, (2, 1) Overworld, (2, 2) Overworld, (2, 3) Overworld, (2, 4) Overworld, (2, 5) Overworld, (2, 6) Overworld], 
-    [(3, 0) Overworld, (3, 1) Overworld, (3, 2) Overworld, (3, 3) Overworld, (3, 4) Overworld, (3, 5) Overworld, (3, 6) Overworld], 
-    [(4, 0) Overworld, (4, 1) Overworld, (4, 2) Overworld, (4, 3) Overworld, (4, 4) Overworld, (4, 5) Overworld, (4, 6) Overworld], 
-    [(5, 0) Overworld, (5, 1) Overworld, (5, 2) Overworld, (5, 3) Overworld, (5, 4) Overworld, (5, 5) Overworld, (5, 6) Overworld], 
-    [(6, 0) Overworld, (6, 1) Overworld, (6, 2) Overworld, (6, 3) Overworld, (6, 4) Overworld, (6, 5) Overworld, (6, 6) Overworld], 
-    [(7, 0) Shop, (7, 0) fire dungeon, (7, 0) ice dungeon, (7, 0) lightning dungeon]
-]
-"""
-
 
 # we have a 7, 7 map meaning chunks are two dimensional list and 7 by 7
 # Every index in the 2D list houses a "Chunk" object

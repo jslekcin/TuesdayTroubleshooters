@@ -34,8 +34,8 @@ class Player(Obj):
         objects.abilities[6] = Abilities.MagicalShield()
         objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
-
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys
+
     # Function to draw player to screen
     def render(self):
         # pygame.draw.rect(objects.screen, "#000000", self.rect)

@@ -20,9 +20,6 @@ from BasicClasses import Obj
 # 1) Pause our other functionality - State machine
 # 2) Setup a 
 
-
-
-
 # Chunks of the map
 class Chunk: 
     def __init__(self, location, image, size, chunk_type: str):
