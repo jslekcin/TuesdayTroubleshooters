@@ -191,7 +191,6 @@ class FireGhostBoss(Enemy):
     def render(self): 
         self.image.set_alpha((self.health/self.maxHealth)*255)
         objects.screen.blit(self.image, self.rect)
-        objects.screen.blit(self.image, self.rect)
         pygame.draw.rect(objects.screen, (15,15,15), pygame.Rect(300,50 ,200,20))
         pygame.draw.rect(objects.screen, (255,0,0), pygame.Rect(300,50,self.health,20))
         

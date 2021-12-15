@@ -57,6 +57,7 @@ def GameplayUpdate():
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
     objects.player.last_valid_position = objects.player.rect.center
     keys = pygame.key.get_pressed()
+    #TODO objects.player.getinput(keys)
     if keys[pygame.K_UP] or keys[pygame.K_w]:
         objects.player.move(0,-objects.moveSpeed)
     if keys[pygame.K_DOWN] or keys[pygame.K_s]:
