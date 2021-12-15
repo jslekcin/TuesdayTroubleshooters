@@ -124,31 +124,6 @@ def ShopUpdate():
 shopImage = pygame.image.load("RPGGameMVP\Pixel Images\ShopInv.png")
 def ShopRender():
     objects.screen.blit(shopImage, (150, 150))
-    #for button in buttons["shop"]: 
-    #    button.render()
-
-'''
-shopImage = pygame.Surface((200,200))
-def generateShop(): # P.S. I know this is not efficient
-    shopImage.fill((200,200,200))
-    #Potion = pygame.image.load("RPGGameMVP\Pixel Images\Purple Potion.png")
-    #PotionRect = Potion.get_rect()
-    #PotionRect.center = (50,50)
-    RedPotion = pygame.image.load("RPGGameMVP\Pixel Images\Red Potion.png")
-    RedPotionRect = RedPotion.get_rect()
-    RedPotionRect.center = (150,50)
-    BluePotion = pygame.image.load("RPGGameMVP\Pixel Images\Blue Potion.png")
-    BluePotionRect = BluePotion.get_rect()
-    BluePotionRect.center = (50,150)
-    GoldPotion = pygame.image.load("RPGGameMVP\Pixel Images\Gold Potion.png")
-    GoldPotionRect = GoldPotion.get_rect()
-    GoldPotionRect.center = (150,150)
-    #shopImage.blit(Potion, PotionRect)
-    shopImage.blit(RedPotion, RedPotionRect)
-    shopImage.blit(BluePotion, BluePotionRect)
-    shopImage.blit(GoldPotion, GoldPotionRect)
-generateShop()
-'''
 
 objects.abilityPanel = [pygame.image.load("RPGGameMVP\Pixel Images\Arrow Icon.png"),
                 pygame.image.load("RPGGameMVP\Pixel Images\Fireball Icon.png"),
