@@ -110,7 +110,7 @@ class LaunchFireball:
 
 class Fireball(Obj):
     def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
-        super().init(pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png"), position)
+        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Fireball.png"), position)
         self.size = size
         self.dropsize = dropsize
         self.dropsize2 = dropsize2

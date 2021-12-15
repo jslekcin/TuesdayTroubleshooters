@@ -40,7 +40,7 @@ class Player(Obj):
     def render(self):
         # pygame.draw.rect(objects.screen, "#000000", self.rect)
         super().render()
-        objects.abilities[objects.player.currentAbility].render()
+        objects.abilities[self.currentAbility].render()
         if self.currentHealth > self.maxHealth: 
             self.currentHealth = self.maxHealth
         if objects.resourceAmounts["ghostEnergy"] > self.maxEnergy: 
@@ -87,6 +87,51 @@ class Player(Obj):
             self.rect.center = self.last_valid_postion
             self.hit_this_frame = False
         self.last_valid_postion = self.rect.center
+    def getinput(self, keys): 
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.move(0,-objects.moveSpeed)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.move(0,objects.moveSpeed)
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            self.move(-objects.moveSpeed,0)
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]: 
+            self.move(objects.moveSpeed,0)
+    def changeAbility(self, event): 
+        # Pressing Keys
+        if event.key == pygame.K_1 and objects.abilities[0] != None:
+            self.currentAbility = 0
+        if event.key == pygame.K_2 and objects.abilities[1] != None:  
+            self.currentAbility = 1
+        if event.key == pygame.K_3 and objects.abilities[2] != None:  
+            self.currentAbility = 2
+        if event.key == pygame.K_4 and objects.abilities[3] != None:  
+            self.currentAbility = 3
+        if event.key == pygame.K_5 and objects.abilities[4] != None:  
+            self.currentAbility = 4
+        if event.key == pygame.K_6 and objects.abilities[5] != None:  
+            self.currentAbility = 5
+        if event.key == pygame.K_7 and objects.abilities[6] != None:  
+            self.currentAbility = 6
+        if event.key == pygame.K_8 and objects.abilities[7] != None:  
+            self.currentAbility = 7
+        if event.key == pygame.K_9 and objects.abilities[8] != None:  
+            self.currentAbility = 8
+        if event.key == pygame.K_0 and objects.abilities[9] != None:  
+            self.currentAbility = 9
+    def changeAbilityWheel(self,event):
+        # Using Scrollwheel
+        if event.y > 0:
+            self.currentAbility += 1
+            while self.currentAbility > 9 or objects.abilities[self.currentAbility] == None:
+                self.currentAbility += 1
+                if self.currentAbility > 9: 
+                    self.currentAbility = 0
+        if event.y < 0: 
+            self.currentAbility -= 1
+            while self.currentAbility < 0 or objects.abilities[self.currentAbility] == None:
+                self.currentAbility -= 1
+                if self.currentAbility < 0: 
+                   self.currentAbility = 9
     def update(self):
         objects.abilities[self.currentAbility].update()
         self.pos_validate()

@@ -57,15 +57,7 @@ def GameplayUpdate():
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
     objects.player.last_valid_position = objects.player.rect.center
     keys = pygame.key.get_pressed()
-    #TODO objects.player.getinput(keys)
-    if keys[pygame.K_UP] or keys[pygame.K_w]:
-        objects.player.move(0,-objects.moveSpeed)
-    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-        objects.player.move(0,objects.moveSpeed)
-    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-        objects.player.move(-objects.moveSpeed,0)
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d]: 
-        objects.player.move(objects.moveSpeed,0)
+    objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
         print("INFORMATION: ")
         print("Current Quest: "+objects.quests[objects.currentQuest].name) 
@@ -76,26 +68,7 @@ def GameplayUpdate():
         print("")
     # Pressing Keys
     for event in pygame.event.get(pygame.KEYDOWN):
-        if event.key == pygame.K_1 and objects.abilities[0] != None:
-            objects.player.currentAbility = 0
-        if event.key == pygame.K_2 and objects.abilities[1] != None:  
-            objects.player.currentAbility = 1
-        if event.key == pygame.K_3 and objects.abilities[2] != None:  
-            objects.player.currentAbility = 2
-        if event.key == pygame.K_4 and objects.abilities[3] != None:  
-            objects.player.currentAbility = 3
-        if event.key == pygame.K_5 and objects.abilities[4] != None:  
-            objects.player.currentAbility = 4
-        if event.key == pygame.K_6 and objects.abilities[5] != None:  
-            objects.player.currentAbility = 5
-        if event.key == pygame.K_7 and objects.abilities[6] != None:  
-            objects.player.currentAbility = 6
-        if event.key == pygame.K_8 and objects.abilities[7] != None:  
-            objects.player.currentAbility = 7
-        if event.key == pygame.K_9 and objects.abilities[8] != None:  
-            objects.player.currentAbility = 8
-        if event.key == pygame.K_0 and objects.abilities[9] != None:  
-            objects.player.currentAbility = 9
+        objects.player.changeAbility(event)
         # Changing ability level 
         if event.key == pygame.K_l: 
             for i in range(8): 
@@ -108,20 +81,11 @@ def GameplayUpdate():
 
     # Using Scrollwheel
     for event in pygame.event.get(pygame.MOUSEWHEEL): 
-        if event.y > 0:
-            objects.player.currentAbility += 1
-            while objects.player.currentAbility > 9 or objects.abilities[objects.player.currentAbility] == None:
-                objects.player.currentAbility += 1
-                if objects.player.currentAbility > 9: 
-                    objects.player.currentAbility = 0
-        if event.y < 0: 
-            objects.player.currentAbility -= 1
-            while objects.player.currentAbility < 0 or objects.abilities[objects.player.currentAbility] == None:
-                objects.player.currentAbility -= 1
-                if objects.player.currentAbility < 0: 
-                    objects.player.currentAbility = 9
+        objects.player.changeAbilityWheel(event)
 
     # UPDATE (Doing checks in the background ex: checking if something is colliding)
+
+    # Day-Night cycle
     global dayNightCounter
     dayNightCounter += 1
     if dayNightCounter / objects.framerate >= objects.dayLength: 
@@ -133,6 +97,7 @@ def GameplayUpdate():
             NightEvent()
         dayNightCounter = 0
         
+    # Updating current chunk and stuff in it  
     objects.currentChunk = objects.chunks[objects.player.chunk[0]][objects.player.chunk[1]]
     if objects.freeze == True: 
         for thing in objects.currentChunk.contents: 
